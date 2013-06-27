@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row" style="margin-top:80px;">
+        <div class="span4 offset4">
+            <div class="well">
+
+                <div class="page-header" style="margin-top: -5px;">
+                    <h3>Register</h3>
+                </div>
+
+                <form class="form" method="post" action="" id="basic_login_form">
+                    {{ form.email(placeholder='Email', style='width: 95%;')|safe }}
+                    {{ form.password(placeholder='Password', style='width: 95%;')|safe }}
+                    {{ form.password_confirm(placeholder='Confirm', style='width: 95%')|safe }}
+                    <button type="button" class="btn btn-info btn-block" id="submit">Register</button>
+                </form>
+
+                <hr>
+                <a class="btn btn-info btn-block" href="{{ url_for('facebook_login') }}">Register with Facebook</a>
+                <a class="btn btn-info btn-block" href="{{ url_for('google_login') }}">Register with Google</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+    $(document).ready(function(){
+
+        var email = $('#email');
+        var pass = $("#password");
+        var conf = $("#password_confirm");
+        var conf_visible = false;
+
+        email.popover({
+            html: true,
+            trigger: 'manual',
+            content: 'An account has already been registered with that email.<br><br><a href="{{ url_for('forgot_password') }}">Forgot password?</a>',
+            title: 'Whoops.'
+        });
+
+        conf.popover({
+            trigger: 'manual',
+            content: 'Your passwords don\'t match.',
+            title: 'Whoops.'
+        });
+
+        function confirm_password() {
+            if (!(pass.val() == conf.val())) {
+                conf_visible = true;
+                conf.popover('show');
+                setTimeout(function() {
+                    conf.popover('hide');
+                    conf_visible = false;
+                }, 3000);
+            }
+        }
+
+        function register() {
+            if (!conf_visible) {
+                confirm_password();
+            }
+
+            $.post("/auth/register/", {email: $("#email").val(), password: $("#password").val(), password_confirm: $("#password_confirm").val()},
+                    function(responseText)
+                    {
+                        var data = $.parseJSON(responseText);
+
+                        if (data.registered) {
+                            window.location.replace("/auth/welcome/");
+                        } else {
+                            if (data.error_message) {
+
+                                if (data.error_message == 'current_user') {
+                                    email.popover('show');
+                                    setTimeout(function() {
+                                        email.popover('hide');
+                                    }, 3000);
+                                }
+                            }
+                        }
+                    });
+        };
+
+        pass.keypress(function(e) {
+            if (e && e.which == 13) {
+                register();
+            }
+        })
+
+        $("#submit").click(function() {
+            register();
+        });
+
+        $("#password_confirm").blur(function() {
+            confirm_password();
+        });
+    });
+
+    </script>
+
+{% endblock %}
