@@ -58,6 +58,7 @@ class UserAdminView(auth.UserAwareView):
     decorators = [admin_required]
 
     def get(self, context):
+        context['all_users'] = list(auth_models.User.objects())
         return self.render_template(context)
 
     def post(self, context):
