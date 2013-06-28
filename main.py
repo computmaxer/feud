@@ -47,11 +47,12 @@ from feud import views as feud_views
 @app.route("/socket.io/<path:path>")
 def run_socketio(path):
     socketio_manage(request.environ, {'': feud_views.BuzzNamespace})
+    return ''
 
 
 # Copied this from https://github.com/kcarnold/flask-gevent-socketio-chat/
 if __name__ == '__main__':
-    print 'Listening on http://localhost:5000'
+    print 'Listening on http://localhost:8001'
     app.debug = True
     import os
     from werkzeug.wsgi import SharedDataMiddleware
@@ -59,5 +60,7 @@ if __name__ == '__main__':
         '/': os.path.join(os.path.dirname(__file__), 'static')
         })
     from socketio.server import SocketIOServer
-    SocketIOServer(('0.0.0.0', 5000), app, namespace="socket.io",
-                   policy_server=False).serve_forever()
+    SocketIOServer(
+        ('0.0.0.0', 8001),
+        app, namespace="socket.io",
+        policy_server=False).serve_forever()

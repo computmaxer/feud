@@ -9,21 +9,21 @@
                 <div class="page-header" style="margin-top: -5px;">
                     <h3>Login</h3>
                 </div>
-
-                <div id="login_message" class="alert alert-danger" style="display: none;"></div>
-
-                <form class="form" method="post" action="" id="basic_login_form">
-                    {{ form.email(placeholder='Email', style='width: 95%;')|safe }}
-                    {{ form.password(placeholder='Password', style='width: 95%;')|safe }}
-                    <input id="login_submit" class="btn btn-info btn-block" value="Login">
-
-                </form>
+{##}
+{#                <div id="login_message" class="alert alert-danger" style="display: none;"></div>#}
+{##}
+{#                <form class="form" method="post" action="" id="basic_login_form">#}
+{#                    {{ form.email(placeholder='Email', style='width: 95%;')|safe }}#}
+{#                    {{ form.password(placeholder='Password', style='width: 95%;')|safe }}#}
+{#                    <input id="login_submit" class="btn btn-info btn-block" value="Login">#}
+{##}
+{#                </form>#}
 
                 <div class="forgot_password_link">
-                    <a class="forgot_password_link" href="{{ url_for('forgot_password') }}">Forgot password?</a>
+{#                    <a class="forgot_password_link" href="{{ url_for('forgot_password') }}">Forgot password?</a>#}
                 </div>
 
-                <hr>
+{#                <hr>#}
                 <a class="btn btn-info btn-block" href="{{ url_for('google_login') }}">Login with Google</a>
 
 

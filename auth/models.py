@@ -21,6 +21,7 @@ class User(Document):
     created = DateTimeField(default=datetime.datetime.now)
     has_logged_in = BooleanField()
     photo_link = StringField()
+    is_mod = BooleanField(default=False)
 
     def get_display_name(self):
         if self.name:

@@ -6,10 +6,12 @@
 
 """
 import auth
-from socketio import socketio_manage
+
+from feud import mod_required
+
 from socketio.namespace import BaseNamespace
 from socketio.mixins import RoomsMixin, BroadcastMixin
-from flask import request
+
 
 import logging
 
@@ -28,7 +30,22 @@ class BuzzHandler(auth.UserAwareView):
         return self.render_template(context)
 
 
-class BuzzNamespace(BaseNamespace):
+class ModeratorView(auth.UserAwareView):
+    template_name = 'mod.html'
+    decorators = [mod_required]
+
+    def get(self, context):
+        return self.render_template(context)
+
+
+class StatusView(auth.UserAwareView):
+    template_name = 'status.html'
+
+    def get(self, context):
+        return self.render_template(context)
+
+
+class BuzzNamespace(BaseNamespace, BroadcastMixin):
     # def on_nickname(self, nickname):
     #     self.environ.setdefault('nicknames', []).append(nickname)
     #     self.socket.session['nickname'] = nickname
@@ -42,5 +59,15 @@ class BuzzNamespace(BaseNamespace):
 
     def on_message(self, message):
         print "PING!!!", message
+
+    def on_buzz(self, user_info):
+        self.broadcast_event_not_me('player_buzz', user_info)
+
+    def on_enable_buzz(self, message):
+        self.broadcast_event('buzzing_enabled', True)
+        print "Enable buzz called: %s" % message
+
+    def on_reset(self):
+        self.broadcast_event('reset')
 
 

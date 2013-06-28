@@ -26,6 +26,7 @@
                         </h3>
                         <hr>
                         <p><b>Name:</b> {{ user.name }}</p>
+                        <p><b>Email:</b> {{ user.email }}</p>
                         <p>
                             <img src="{{ user.photo_link }}" />
                         </p>
@@ -49,7 +50,7 @@
                         </h3>
                         <hr>
                         <p>
-                            <a id="test-socket" href="#" class="btn btn-primary">Buzz In</a>
+                            <a id="buzz-in" href="#" class="btn btn-primary">Buzz In</a>
                         </p>
                     </div>
                 </div>
@@ -67,9 +68,20 @@
     $(document).ready(function(){
 
         var socket = io.connect();
+        var username = '{{ user.email }}';
+        var player_name = '{{ user.name }}';
+        var photo_link = '{{ user.photo_link }}';
 
-        $("#test-socket").click(function(){
-            socket.emit('message', "test message");
+        $("#buzz-in").click(function(){
+            socket.emit('buzz', JSON.stringify({username: username, photo_link: photo_link, player_name: player_name}));
+        });
+
+        socket.on('buzzing_enabled', function(msg){
+            console.log("buzzing enabled");
+        });
+
+        socket.on('player_buzz', function(username){
+            console.log(username + " buzzed");
         });
 
     });
