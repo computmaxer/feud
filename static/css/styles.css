@@ -297,7 +297,7 @@ figure {
 }
 
 .navbar .nav li.dropdown.active > .dropdown-toggle:hover {
-    color: #41b7d8;
+    color: #7bce05;
 }
 
 .navbar .btn-navbar {
@@ -340,18 +340,18 @@ figure {
 }
 
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-    color: #41b7d8;
+    color: #7bce05;
 }
 
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: #FFFFFF;
-    color: #41b7d8;
+    color: #7bce05;
 }
 
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
     background-color: transparent;
-    color: #41b7d8;
+    color: #7bce05;
     text-decoration: none;
 }
 
@@ -1101,4 +1101,20 @@ figure {
 .btn-wf:active,
 .btn-wf.active {
   background-color: #68a804 \9;
+}
+
+.dropdown-menu li > a:hover,
+.dropdown-menu li > a:focus,
+.dropdown-submenu:hover > a {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #7bce05;
+  background-image: none;
+}
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #7bce05;
+  background-image: none;
 }
