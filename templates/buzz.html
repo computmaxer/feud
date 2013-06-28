@@ -22,33 +22,34 @@
                 <div class='span4'>
                     <div class='well'>
                         <h3>
-                            Test
+                            Player Information
                         </h3>
                         <hr>
+                        <p><b>Name:</b> {{ user.name }}</p>
                         <p>
-                            Simply a Test
+                            <img src="{{ user.photo_link }}" />
                         </p>
                     </div>
                 </div>
                 <div class='span4'>
                     <div class='well'>
                         <h3>
-                            Try clicking this
+                            Game Information
                         </h3>
                         <hr>
                         <p>
-                            I wonder if it will work <a id="test-socket" href="#" class="btn btn-primary">Try me!</a>
+                            {{ players }} are currently waiting to buzz.
                         </p>
                     </div>
                 </div>
                 <div class='span4'>
                     <div class='well'>
                         <h3>
-                            Well?
+                            Buzz!
                         </h3>
                         <hr>
                         <p>
-                            Test
+                            <a id="test-socket" href="#" class="btn btn-primary">Buzz In</a>
                         </p>
                     </div>
                 </div>

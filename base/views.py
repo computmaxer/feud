@@ -7,10 +7,20 @@ class BaseMultiMethodView(MethodView):
     template_name = None
     active_nav = None
 
-    def get(self):
+    def dispatch_request(self, *args, **kwargs):
+        meth = getattr(self, request.method.lower(), None)
+        # if the request method is HEAD and we don't have a handler for it
+        # retry with GET
+        if meth is None and request.method == 'HEAD':
+            meth = getattr(self, 'get', None)
+        assert meth is not None, 'Unimplemented method %r' % request.method
+        kwargs['context'] = self.get_context()
+        return meth(*args, **kwargs)
+
+    def get(self, context):
         return NotImplementedError("GET method not implemented.")
 
-    def post(self):
+    def post(self, context):
         id = request.form.get('id', None)
         if id:
             attr = getattr(self, 'post_%s' % id, None)
@@ -25,3 +35,6 @@ class BaseMultiMethodView(MethodView):
         if not context:
             context = {}
         return render_template(self.template_name, **context)
+
+    def get_context(self):
+        return {}

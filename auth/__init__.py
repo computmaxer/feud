@@ -8,6 +8,7 @@ import flask_login
 from flask_login import LoginManager
 
 import settings
+import logging
 
 
 def initialize(app):
@@ -22,7 +23,10 @@ def user_unauthorized_callback():
 
 
 def load_user(userid):
-    return auth_models.WTUser.get_by_id(int(userid))
+    user = auth_models.User.objects(id=userid)
+    if user:
+        return user.get()
+    return None
 
 
 class UserAwareView(BaseMultiMethodView):

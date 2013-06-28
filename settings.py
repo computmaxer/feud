@@ -1,5 +1,5 @@
-GOOGLE_CLIENT_ID = ''
-GOOGLE_SECRET = ''
+GOOGLE_CLIENT_ID = '387304306559.apps.googleusercontent.com'
+GOOGLE_SECRET = '3o6xJe1kSg2LAvzSHjccoD47'
 
 DEBUG = False
 

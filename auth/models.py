@@ -1,10 +1,10 @@
-from mongoengine import Document
-from mongoengine import StringField
-from mongoengine import EmailField
-from mongoengine import BooleanField
-from mongoengine import ListField
-from mongoengine import ReferenceField
-from mongoengine import DateTimeField
+from flask_mongoengine import Document
+from mongoengine.fields import StringField
+from mongoengine.fields import EmailField
+from mongoengine.fields import BooleanField
+from mongoengine.fields import ListField
+from mongoengine.fields import ReferenceField
+from mongoengine.fields import DateTimeField
 
 from auth import utils as auth_utils
 
@@ -20,6 +20,7 @@ class User(Document):
     email = EmailField()
     created = DateTimeField(default=datetime.datetime.now)
     has_logged_in = BooleanField()
+    photo_link = StringField()
 
     def get_display_name(self):
         if self.name:
@@ -31,7 +32,7 @@ class User(Document):
         return self.email
 
     def get_id(self):
-        return self.pk
+        return str(self.pk)
 
     def is_active(self):
         return True
@@ -51,7 +52,7 @@ class User(Document):
 
     @classmethod
     def get_user_by_email(cls, email):
-        return User.objects(email=email).get()
+        return User.objects(email=email)
 
     @classmethod
     def create_placeholder_user(cls, email, name=None):

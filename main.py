@@ -6,6 +6,8 @@ sys.path.insert(0, LIB_PATH)
 
 from flask import Flask
 
+from flask_mongoengine import MongoEngine
+
 import auth
 from auth import urls as auth_urls
 
@@ -21,8 +23,11 @@ app = Flask(__name__, static_folder=os.path.join(PROJECT_ROOT, 'static'), static
 
 auth.initialize(app)
 
-app.secret_key = 'this-is-just-our-dev-key-oh-so-secret'
+app.config['MONGODB_DB'] = 'wfeud'
+app.config['SECRET_KEY'] = 'my_super_secret_key'
 
+# Setting up the connection to the MongoDB backend.
+db = MongoEngine(app)
 
 #Define URLs
 base_urls.setup_urls(app)

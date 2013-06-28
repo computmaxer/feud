@@ -5,25 +5,27 @@
 .. moduleauthor:: Max Peterson <computmaxer@gmail.com>
 
 """
-from base import views as base_views
+import auth
 from socketio import socketio_manage
 from socketio.namespace import BaseNamespace
 from socketio.mixins import RoomsMixin, BroadcastMixin
 from flask import request
 
+import logging
 
-class MainHandler(base_views.BaseMultiMethodView):
+
+class MainHandler(auth.UserAwareView):
     template_name = 'home.html'
 
-    def get(self):
-        return self.render_template()
+    def get(self, context):
+        return self.render_template(context)
 
 
-class BuzzHandler(base_views.BaseMultiMethodView):
+class BuzzHandler(auth.UserAwareView):
     template_name = 'buzz.html'
 
-    def get(self):
-        return self.render_template()
+    def get(self, context):
+        return self.render_template(context)
 
 
 class BuzzNamespace(BaseNamespace):
