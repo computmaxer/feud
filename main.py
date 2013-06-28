@@ -52,7 +52,7 @@ def run_socketio(path):
 
 # Copied this from https://github.com/kcarnold/flask-gevent-socketio-chat/
 if __name__ == '__main__':
-    print 'Listening on http://localhost:8001'
+    print 'Listening on http://localhost:5000'
     app.debug = True
     import os
     from werkzeug.wsgi import SharedDataMiddleware
@@ -61,6 +61,6 @@ if __name__ == '__main__':
         })
     from socketio.server import SocketIOServer
     SocketIOServer(
-        ('0.0.0.0', 8001),
+        ('0.0.0.0', 5000),
         app, namespace="socket.io",
         policy_server=False).serve_forever()

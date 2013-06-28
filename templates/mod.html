@@ -8,16 +8,14 @@
             <div class='span3'>
                 <div class="well">
                     <h3>
-                        Game Information
+                        Game Controls
                     </h3>
                     <hr>
                     <p>
-                        {{ players }} are currently waiting to buzz.
+                        Press 'e' to enable buzz and 'r' to reset, or click the buttons.
                     </p>
                     <p>
                         <a id="enable_buzz" href="#" class="btn btn-primary">Enable Buzz</a>
-                    </p>
-                    <p>
                         <a id="reset_game" href="#" class="btn btn-inverse">Reset</a>
                     </p>
                 </div>
@@ -53,7 +51,7 @@
             if(!buzz_enabled){
                 console.log("buzzing enabled");
                 buzz_enabled = true;
-                $("#players_buzzed").append('<p><b>BUZZING ENABLED</b></p><hr>');
+                $("#players_buzzed").append('<p><img src="/static/img/survivor_intern.png" height="40" width="40" /><b> Buzzing Enabled</b></p>');
             }
         });
 
@@ -62,7 +60,7 @@
             var username = user_info.username;
             if(usernames_buzzed.indexOf(username) < 0){
                 usernames_buzzed.push(username);
-                $("#players_buzzed").append('<p><img src="' + user_info.photo_link + '" height="40" width="40" /><b> Buzz!</b> ' + user_info.player_name + '</p>' );
+                $("#players_buzzed").append('<p><img src="' + user_info.photo_link + '" height="40" width="40" /> <span class="playername"> ' + user_info.player_name + ' </span>buzzed! </p>' );
 
             }
         });
@@ -74,6 +72,15 @@
             $("#players_buzzed").html('');
         });
 
+    });
+
+    $(document).on('keydown', function(event){
+        if(event.which == 69){
+            $("#enable_buzz").trigger('click');
+        }
+        if(event.which == 82){
+            $("#reset_game").trigger('click');
+        }
     });
 
     </script>

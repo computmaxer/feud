@@ -1065,3 +1065,10 @@ figure {
     text-align: center;
 }
 
+#players_buzzed {
+    font-size: 18px;
+}
+
+#players_buzzed span.playername {
+    font-weight: bold;
+}

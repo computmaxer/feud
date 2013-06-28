@@ -9,6 +9,8 @@ import auth
 
 from feud import mod_required
 
+from flask_login import login_required
+
 from socketio.namespace import BaseNamespace
 from socketio.mixins import RoomsMixin, BroadcastMixin
 
@@ -25,6 +27,7 @@ class MainHandler(auth.UserAwareView):
 
 class BuzzHandler(auth.UserAwareView):
     template_name = 'buzz.html'
+    decorators = [login_required]
 
     def get(self, context):
         return self.render_template(context)
@@ -61,7 +64,7 @@ class BuzzNamespace(BaseNamespace, BroadcastMixin):
         print "PING!!!", message
 
     def on_buzz(self, user_info):
-        self.broadcast_event_not_me('player_buzz', user_info)
+        self.broadcast_event('player_buzz', user_info)
 
     def on_enable_buzz(self, message):
         self.broadcast_event('buzzing_enabled', True)

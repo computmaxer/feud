@@ -49,13 +49,16 @@
                     <h1 class='brand'>
                         <a href='{{ url_for('home') }}'>
                             WFeud
-                            <i class='icon-bell-alt'></i>
+                            <i class='icon-gamepad'></i>
                         </a>
                     </h1>
                     <div class='nav-collapse'>
                         <ul class='nav pull-right'>
 {#                            <li class='active'><a href="{{ url_for('home') }}">Home</a></li>#}
                         {% if not user or not user.is_authenticated() %}
+                            {% if user.is_mod %}
+                                <li class=''><a href="{{ url_for('mod') }}">Moderator</a></li>
+                            {% endif %}
 {#                            <li class=''><a href="{{ url_for('register') }}">Register</a></li>#}
                             <li class=''><a href="{{ url_for('google_login') }}">Login</a></li>
                         {% else %}

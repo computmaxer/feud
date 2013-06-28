@@ -5,53 +5,37 @@
     <div class='container'>
 
         <div class='row-fluid'>
-            <div class='home-carosel-container'>
-                <div class='span7'>
-                    <div class='hero-unit no-background'>
-                        <h1>Test Socket.IO</h1>
-                    </div>
-                </div>
-                <div class='span5'>
-                    <div class='main-icon'>
-                    </div>
+            <div class='span4'>
+                <div class='well'>
+                    <h3>
+                        Player Information
+                    </h3>
+                    <hr>
+                    <p style="text-align: center;">
+                        <img src="{{ user.photo_link }}" height="250" width="250" />
+                    </p>
+                    <p><b>Name:</b> {{ user.name }}</p>
+                    <p><b>Email:</b> {{ user.email }}</p>
+
                 </div>
             </div>
-        </div>
-        <div class='row-fluid'>
-            <div class='home-three-panel-container'>
-                <div class='span4'>
-                    <div class='well'>
-                        <h3>
-                            Player Information
-                        </h3>
-                        <hr>
-                        <p><b>Name:</b> {{ user.name }}</p>
-                        <p><b>Email:</b> {{ user.email }}</p>
-                        <p>
-                            <img src="{{ user.photo_link }}" />
-                        </p>
+            <div class="span8">
+                <div class='row-fluid'>
+                    <div class='span12'>
+                        <div class='well'>
+                            <h3>
+                                Buzz!
+                            </h3>
+                            <hr>
+                            <p>
+                                <a id="buzz-in" href="#" class="btn btn-primary btn-block btn-large">Buzz In</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class='span4'>
-                    <div class='well'>
-                        <h3>
-                            Game Information
-                        </h3>
-                        <hr>
-                        <p>
-                            {{ players }} are currently waiting to buzz.
-                        </p>
-                    </div>
-                </div>
-                <div class='span4'>
-                    <div class='well'>
-                        <h3>
-                            Buzz!
-                        </h3>
-                        <hr>
-                        <p>
-                            <a id="buzz-in" href="#" class="btn btn-primary">Buzz In</a>
-                        </p>
+                <div class='row-fluid'>
+                    <div class='span12'>
+                        {% include "buzz_results.html" %}
                     </div>
                 </div>
             </div>
@@ -65,6 +49,10 @@
 {% block script %}
 
     <script>
+    var usernames_buzzed = [];
+    var buzz_position = 1;
+    var buzz_enabled = false;
+
     $(document).ready(function(){
 
         var socket = io.connect();
@@ -77,13 +65,36 @@
         });
 
         socket.on('buzzing_enabled', function(msg){
-            console.log("buzzing enabled");
+            if(!buzz_enabled){
+                console.log("buzzing enabled");
+                buzz_enabled = true;
+                $("#players_buzzed").append('<p><img src="/static/img/survivor_intern.png" height="40" width="40" /><b> Buzzing Enabled</b></p>');
+            }
         });
 
-        socket.on('player_buzz', function(username){
-            console.log(username + " buzzed");
+        socket.on('player_buzz', function(data){
+            var user_info = JSON.parse(data);
+            var username = user_info.username;
+            if(usernames_buzzed.indexOf(username) < 0){
+                usernames_buzzed.push(username);
+                $("#players_buzzed").append('<p><img src="' + user_info.photo_link + '" height="40" width="40" /> <span class="playername"> ' + user_info.player_name + ' </span>buzzed! </p>' );
+
+            }
         });
 
+        socket.on('reset', function(){
+            buzz_enabled = false;
+            usernames_buzzed = [];
+            buzz_position = 1;
+            $("#players_buzzed").html('');
+        });
+
+    });
+
+    $(document).on('keydown', function(event){
+        if(event.which == 66){
+            $("#buzz-in").trigger('click');
+        }
     });
 
     </script>
