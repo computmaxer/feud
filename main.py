@@ -46,7 +46,8 @@ from feud import views as feud_views
 # Wanted a better place for this.  Couldn't get app to import elsewhere.  Oh well
 @app.route("/socket.io/<path:path>")
 def run_socketio(path):
-    socketio_manage(request.environ, {'': feud_views.BuzzNamespace})
+    if 'socketio' in request.environ:
+        socketio_manage(request.environ, {'': feud_views.BuzzNamespace})
     return ''
 
 
