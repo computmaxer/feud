@@ -265,6 +265,8 @@ class GoogleAuthorized(UserAwareView):
 
                 if 'picture' in output:
                     photo = output['picture']
+                else:
+                    photo = "http://feud.computmaxer.net/static/img/default_logo.png"
 
                 if email:
                     user = auth_models.User.get_user_by_email(email)
