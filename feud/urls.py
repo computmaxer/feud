@@ -14,3 +14,4 @@ def setup_urls(app):
     app.add_url_rule('/buzz/', view_func=feud_views.BuzzHandler.as_view('buzz'))
     app.add_url_rule('/mod/', view_func=feud_views.ModeratorView.as_view('mod'))
     app.add_url_rule('/status/', view_func=feud_views.StatusView.as_view('status'))
+    app.add_url_rule('/admin/', view_func=feud_views.UserAdminView.as_view('admin'))

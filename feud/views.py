@@ -6,8 +6,13 @@
 
 """
 import auth
+from auth import models as auth_models
 
 from feud import mod_required
+from feud import admin_required
+
+from flask import request
+from flask import redirect
 
 from flask_login import login_required
 
@@ -46,6 +51,28 @@ class StatusView(auth.UserAwareView):
 
     def get(self, context):
         return self.render_template(context)
+
+
+class UserAdminView(auth.UserAwareView):
+    template_name = 'user_admin.html'
+    decorators = [admin_required]
+
+    def get(self, context):
+        return self.render_template(context)
+
+    def post(self, context):
+        data = request.form
+
+        email = data.get('email')
+        is_mod = data.get('is_mod') == 'on'
+
+        user = auth_models.User.get_user_by_email(email)
+        if user:
+            user = user.get()
+            user.is_mod = is_mod
+            user.save()
+
+        return redirect('admin')
 
 
 class BuzzNamespace(BaseNamespace, BroadcastMixin):

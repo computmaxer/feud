@@ -60,3 +60,6 @@ class User(Document):
         user = User(email=email, name=name, has_logged_in=False)
         user.save()
         return user
+
+    def __repr__(self):
+        return "<User: email=%s, name=%s, is_mod=%s>" % (self.email, self.name, self.is_mod)
