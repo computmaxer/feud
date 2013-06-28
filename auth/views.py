@@ -275,7 +275,7 @@ class GoogleAuthorized(UserAwareView):
                 else:
                     user = user.get()
                     user.photo_link = photo
-                    user.put()
+                    user.save()
 
                 if user:
                     flask_login.login_user(user)
