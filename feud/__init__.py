@@ -35,7 +35,7 @@ def admin_required(func):
     def decorated_view(*args, **kwargs):
         if (not current_user or not hasattr(current_user, 'email') or
                 (current_user.email != "computmaxer@gmail.com" and
-                 current_user.email != "maxwell.peterson@webfilings.com")):
+                 current_user.email != "mike.philip.davis@gmail.com")):
                 return current_app.login_manager.unauthorized()
         return func(*args, **kwargs)
     return decorated_view

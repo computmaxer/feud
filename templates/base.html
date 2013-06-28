@@ -46,7 +46,7 @@
                     </a>
                     <h1 class='brand'>
                         <a href='{{ url_for('home') }}'>
-                            <img src="/static/img/wfeud.png" style="height: 35px;"/>
+                            <img src="/static/img/Wfeud.png" style="height: 35px;"/>
                         </a>
                     </h1>
                     <div class='nav-collapse'>
@@ -88,6 +88,11 @@
     </header>
 
     <div id="main-content" class="container">
+    <!--[if lt IE 10]>
+        <div class="alert alert-block alert-error" style="text-align: center;">
+            Wfeud does not support Internet Explorer versions less than IE10.  Please use Chrome, Firefox, or IE10.
+        </div>
+    <![endif]-->
         {% block content %}{% endblock %}
     </div>
 

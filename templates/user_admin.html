@@ -31,4 +31,34 @@
             </div>
         </div>
 
+        <div class='row-fluid'>
+
+            <div class='span8 offset2'>
+                <div class="well">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Picture</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Is Mod?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in all_users %}
+                            <tr>
+                                <th><img src="{{ user.photo_link }}" height="40" width="40" /></th>
+                                <th>{{ user.name }}</th>
+                                <th>{{ user.email }}</th>
+                                <th>{{ user.is_mod }}</th>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 {% endblock %}
