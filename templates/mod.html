@@ -51,7 +51,7 @@
             if(!buzz_enabled){
                 console.log("buzzing enabled");
                 buzz_enabled = true;
-                $("#players_buzzed").append('<p><img src="/static/img/survivor_intern.png" height="40" width="40" /><b> Buzzing Enabled</b></p>');
+                $("#players_buzzed").append('<p><img src="/static/img/survivor_intern.png" height="50" width="50" /><b> Buzzing Enabled</b></p>');
             }
         });
 
@@ -60,7 +60,7 @@
             var username = user_info.username;
             if(usernames_buzzed.indexOf(username) < 0){
                 usernames_buzzed.push(username);
-                $("#players_buzzed").append('<p><img src="' + user_info.photo_link + '" height="40" width="40" /> <span class="playername"> ' + user_info.player_name + ' </span>buzzed! </p>' );
+                $("#players_buzzed").append('<p><img src="' + user_info.photo_link + '" height="50" width="50" /> <span class="playername"> ' + user_info.player_name + ' </span>buzzed! </p>' );
 
             }
         });
