@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class='container'>
+
+        <div class='row-fluid'>
+            <div class='span6 offset3'>
+                <div class='well'>
+                    <h3>
+                        Player Information
+                    </h3>
+                    <hr>
+                    <p style="text-align: center;">
+                        <img src="{{ user.photo_link }}" height="250" width="250" style="margin-bottom: 10px;"/>
+                    </p>
+                    <p><b>Name:</b> {{ user.name }}</p>
+                    <p><b>Email:</b> {{ user.email }}</p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -76,6 +76,13 @@ class UserAdminView(auth.UserAwareView):
         return redirect('admin')
 
 
+class ProfileView(auth.UserAwareView):
+    template_name = 'user_profile.html'
+
+    def get(self, context):
+        return self.render_template(context)
+
+
 class BuzzNamespace(BaseNamespace, BroadcastMixin):
     # def on_nickname(self, nickname):
     #     self.environ.setdefault('nicknames', []).append(nickname)
