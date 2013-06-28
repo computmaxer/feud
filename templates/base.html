@@ -63,6 +63,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_display_name() }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                                    <li><a href="{{ url_for('buzz') }}">Go to Game</a></li>
                                     <li class="divider"></li>
                                     <li>
                                         <a href="{{ url_for('logout') }}">Logout</a>
