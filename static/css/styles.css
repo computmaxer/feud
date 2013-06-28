@@ -1078,52 +1078,27 @@ figure {
     font-weight: bold;
 }
 
-.btn-primary {
-  border-color: #68a804;
+.btn-wf {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #71bb04;
-  background-image: -webkit-linear-gradient(top, #7bce05, #68a804);
-  background-image: -moz-linear-gradient(top, #7bce05, #68a804);
-  background-image: linear-gradient(top, #7bce05, #68a804);
-  background-repeat: repeat-x;
-}
-
-.btn-primary, .no-touch .btn-primary:hover {
-  color: white;
-}
-
-.btn-primary .caret {
-  border-top-color: white;
-  border-bottom-color: white;
-  opacity: 0.8;
-}
-
-.no-touch .btn-primary:hover {
-  background-color: #80d405;
-  background-image: -webkit-linear-gradient(top, #8ae706, #77c105);
-  background-image: -moz-linear-gradient(top, #8ae706, #77c105);
-  background-image: linear-gradient(top, #8ae706, #77c105);
-  background-repeat: repeat-x;
-}
-
-.no-touch .btn-primary:hover .caret {
-  border-top-color: white;
-  border-bottom-color: white;
-  opacity: 1;
-}
-
-html .btn-primary:hover:active {
+  border-color: #68a804;
   background-image: none;
+
+}
+.btn-wf:hover,
+.btn-wf:active,
+.btn-wf.active,
+.btn-wf.disabled,
+.btn-wf[disabled] {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #68a804;
-}
-
-.btn-primary:focus {
-  border: 1px solid #68a804;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-
-.btn-primary.active, .no-touch .btn-primary.active:hover, html .btn-primary.active:hover:active {
   background-image: none;
-  background-color: #68a804;
+  border-color: #68a804;
+
+}
+.btn-wf:active,
+.btn-wf.active {
+  background-color: #68a804 \9;
 }
